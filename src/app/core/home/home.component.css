@@ -1,0 +1,15 @@
+.bg {
+    min-height: 100vh;
+    width: 100vw;
+    background-image: url("../../../assets/Kitche_Background_1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.card-img-top {
+    max-height: 400px;
+    min-height: 400px;
+    object-fit: contain;
+}

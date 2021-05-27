@@ -1,45 +1,57 @@
 <div class="bg">
-    <div class="container d-flex flex-column justify-content-center align-items-center">
 
-      <!-- Start Search Input For Alternate Ingredients -->
-      <div class="my-5 row w-100">
-        <div class="col-12">
-          <div class="form-group">
-            <label for="search"><strong>Main Ingredient</strong></label>
-            <input #searchIngredient type="text" placeholder="Search Ingredients ..." class="form-control">
-            <small class="form-text text-muted">Search for alternate ingredients.</small>
-          </div>
+  <!-- header -->
+  <header class="d-flex justify-content-center p-3">
+    <img src="../../../assets/main_logo.jpeg">
+  </header>
+
+  <!-- main content -->
+  <div class="container d-flex flex-column justify-content-center align-items-center">
+
+    <!-- Start Search Input For Alternate Ingredients -->
+    <div class="my-5 row w-100">
+      <div class="col-12">
+        <div class="search d-flex justify-content-center flex-column align-items-center">
+          <h3 class="text-uppercase text-center font-weight-normal" style="letter-spacing: 1.5px; margin-bottom: 24px; color: #2b2f33bf;"> what do you need to replace? </h3>
+          <input #searchIngredient type="text" placeholder="Enter an ingredient" class="search-input">
         </div>
       </div>
-      <!-- End Search Input For Alternate Ingredients -->
-
-      <!-- Alternate Ingredient Cards -->
-      <div class="row w-100">
-        <div class="col-12">
-          <p><strong>Alternate Ingredients</strong></p>
-        </div>
-      </div>
-
-      <div *ngIf="alternateIngredients.length === 0" class="row w-100">
-        <div class="col-12">
-          <p class="text-center">No Ingredients Found</p>
-        </div>
-      </div>
-
-      <div class="row w-100">
-
-        <!-- Cards -->
-        <ng-container *ngFor="let ingredient of alternateIngredients">
-          <div *ngIf="ingredient.name !== '' " class="col-12 col-md-4 mb-3 mb-md-0">
-            <div class="card">
-              <img [src]="ingredient.imageSrc" class="card-img-top" [alt]="ingredient.imageAlt">
-              <div class="card-body">
-                <h5 class="card-title">{{ingredient.name}}</h5>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-
     </div>
+    <!-- End Search Input For Alternate Ingredients -->
+
+    <!-- Alternate Ingredient Cards -->
+
+    <div *ngIf="alternateIngredients.length === 0" class="row w-100">
+      <div class="col-12">
+        <p class="text-center">No Ingredients Found</p>
+      </div>
+    </div>
+
+    <div class="row w-100">
+
+      <!-- Cards -->
+      <ng-container *ngFor="let ingredient of alternateIngredients">
+        <div *ngIf="ingredient.name !== '' " class="col-12 col-md-4 mb-3 mb-md-0">
+          <!-- <div class="card"> -->
+            <img [src]="ingredient.imageSrc" class="card-img-top" [alt]="ingredient.imageAlt">
+            <h5 class="card-title">{{ingredient.name}}</h5>
+            <!-- <div class="card-body">
+            </div> -->
+          <!-- </div> -->
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+
 </div>
+
+<!-- Footer -->
+<footer class="p-3 bg-white">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between small">
+      <p class="mb-0">Copyright subthegrub.com. All Rights Reserved</p>
+      <p class="mb-0">Brought to you by <img width="110px" src="../../../assets/footer_logo.jpeg"></p>
+    </div>
+  </div>
+</footer>

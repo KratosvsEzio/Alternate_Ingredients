@@ -11,7 +11,7 @@ export class IngredientService {
 
   alternateIngredients = new BehaviorSubject<any>([])
 
-  private ingredientUrl = 'http://localhost:4000/api/ingredient';
+  private ingredientUrl = 'https://node.subthegrub.com/api/ingredient';
 
   constructor(
     private http: HttpClient,
@@ -32,14 +32,7 @@ export class IngredientService {
 
   addAlternateIngredients(form) {
     console.log('form data', form)
-    return this.http.post<{status: boolean, message: string}>(this.ingredientUrl, form).subscribe( (res: any) => {
-      if(res.code == 200) {
-        this.showSuccess(res.message);
-      } else {
-        this.showError(res.message);
-      }
-      console.log('res');
-    });
+    return this.http.post<{status: boolean, message: string}>(this.ingredientUrl, form)
   }
 
   // ---------------------------------------Success Toaster-------------------------------------------------------//

@@ -1,6 +1,6 @@
 .bg {
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-image: url("../../../assets/Kitche_Background_1.jpg");
     background-repeat: no-repeat;
     background-position: center;
@@ -10,6 +10,33 @@
 
 .card-img-top {
     max-height: 400px;
-    min-height: 400px;
-    object-fit: contain;
+    min-height: 340px;
+    object-fit: cover;
+}
+
+.card-title {
+    position: relative;
+    width: 90%;
+    background-color: #d7f3a4;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    top: -5%;
+}
+
+.search {
+    width: max-content;
+    background-color: #d3d6c7;
+    padding: 16px 32px 48px;
+    border-radius: 48px/12px;
+    margin: auto;
+}
+
+.search-input {
+    width: 95%;
+    background-color: white;
+    border-radius: 30px/5px;
+    border: none;
+    padding: 10px;
 }

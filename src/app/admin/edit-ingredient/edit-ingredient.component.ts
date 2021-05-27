@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { IngredientService } from 'src/app/core/service/ingredient.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-ingredient',
@@ -16,7 +17,8 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private ingredientService: IngredientService
+    private ingredientService: IngredientService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -95,8 +97,32 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
 
   submit(form) {
     console.log(form.value)
-    this.ingredientService.addAlternateIngredients(form.value);
+    this.ingredientService.editAlternateIngredients(form.value).subscribe( (res: any) => {
+      this.ingredientsForm.reset();
+      if(res.code == 200) {
+        this.showSuccess(res.message);
+      } else {
+        this.showError(res.message);
+      }
+      console.log('res');
+    });;
+  }
 
+  // ---------------------------------------Success Toaster-------------------------------------------------------//
+  showSuccess(message) {
+    this.toastr.success(message, 'Success', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
+  }
+
+  // ---------------------------------------Error Toaster---------------------------------------------------------//
+  showError(message) {
+    console.log('message: ', message)
+    this.toastr.error(message, 'Error', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
   }
 
 }

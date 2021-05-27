@@ -1,6 +1,7 @@
 import { IngredientService } from './../../core/service/ingredient.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ingredients',
@@ -13,7 +14,8 @@ export class IngredientsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private ingredientService: IngredientService
+    private ingredientService: IngredientService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -65,8 +67,31 @@ export class IngredientsComponent implements OnInit {
 
   submit(form) {
     console.log(form.value)
-    
-    this.ingredientService.addAlternateIngredients(form.value);
+    this.ingredientService.addAlternateIngredients(form.value).subscribe( (res: any) => {
+      this.ingredientsForm.reset();
+      if(res.code == 200) {
+        this.showSuccess(res.message);
+      } else {
+        this.showError(res.message);
+      }
+      console.log('res');
+    });;
+  }
 
+  // ---------------------------------------Success Toaster-------------------------------------------------------//
+  showSuccess(message) {
+    this.toastr.success(message, 'Success', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
+  }
+
+  // ---------------------------------------Error Toaster---------------------------------------------------------//
+  showError(message) {
+    console.log('message: ', message)
+    this.toastr.error(message, 'Error', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
   }
 }

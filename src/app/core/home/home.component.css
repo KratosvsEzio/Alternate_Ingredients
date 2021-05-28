@@ -1,5 +1,5 @@
 .bg {
-    min-height: 100vh;
+    min-height: calc(100vh - 38px);
     width: 100%;
     background-image: url("../../../assets/Kitche_Background_1.jpg");
     background-repeat: no-repeat;
@@ -12,6 +12,9 @@
     max-height: 400px;
     min-height: 340px;
     object-fit: cover;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .card-title {

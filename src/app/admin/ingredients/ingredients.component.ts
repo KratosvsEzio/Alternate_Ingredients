@@ -66,7 +66,7 @@ export class IngredientsComponent implements OnInit {
   }
 
   submit(form) {
-    console.log(form.value)
+    // console.log(form.value)
     this.ingredientService.addAlternateIngredients(form.value).subscribe( (res: any) => {
       this.ingredientsForm.reset();
       if(res.code == 200) {
@@ -74,7 +74,7 @@ export class IngredientsComponent implements OnInit {
       } else {
         this.showError(res.message);
       }
-      console.log('res');
+      // console.log('res');
     });;
   }
 
@@ -88,7 +88,7 @@ export class IngredientsComponent implements OnInit {
 
   // ---------------------------------------Error Toaster---------------------------------------------------------//
   showError(message) {
-    console.log('message: ', message)
+    // console.log('message: ', message)
     this.toastr.error(message, 'Error', {
       progressBar: true,
       progressAnimation: 'increasing'

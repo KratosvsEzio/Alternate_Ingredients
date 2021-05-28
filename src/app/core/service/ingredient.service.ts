@@ -31,12 +31,12 @@ export class IngredientService {
   }
 
   addAlternateIngredients(form) {
-    console.log('form data', form)
+    // console.log('form data', form)
     return this.http.post<{status: boolean, message: string}>(this.ingredientUrl, form)
   }
 
   editAlternateIngredients(form) {
-    console.log('form data', form)
+    // console.log('form data', form)
     return this.http.put<{status: boolean, message: string}>(this.ingredientUrl, form)
   }
 
@@ -50,7 +50,7 @@ export class IngredientService {
 
   // ---------------------------------------Error Toaster---------------------------------------------------------//
   showError(message) {
-    console.log('message: ', message)
+    // console.log('message: ', message)
     this.toastr.error(message, 'Error', {
       progressBar: true,
       progressAnimation: 'increasing'

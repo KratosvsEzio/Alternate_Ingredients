@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.ingredientService.getAlternateIngredients().subscribe( (alternateIngredients: any) => {
-      console.log('this.', alternateIngredients);
+      // console.log('this.', alternateIngredients);
       this.alternateIngredients = alternateIngredients;
     })
   }
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         switchMap( (value: any) => this.ingredientService.fetchAlternateIngredients(value) )
       )
       .subscribe( async (res: any) => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         const data = res.data[0];
         this.ingredientService.setAlternateIngredients([
           {

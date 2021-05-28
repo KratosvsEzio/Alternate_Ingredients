@@ -1,3 +1,5 @@
 .ingredient-preview {
     width: inherit!important;
+    max-height: 300px;
+    object-fit: cover;
 }

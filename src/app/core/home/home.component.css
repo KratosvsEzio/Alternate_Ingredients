@@ -34,6 +34,7 @@
     padding: 16px 32px 48px;
     border-radius: 48px/12px;
     margin: auto;
+    width: 100%;
 }
 
 .search-input {
@@ -42,4 +43,14 @@
     border-radius: 30px/5px;
     border: none;
     padding: 10px;
+}
+
+.brand-logo{
+    width: 400px;
+}
+
+@media (max-width: 767.5px) {
+    .brand-logo{
+        width: 200px;
+    }
 }

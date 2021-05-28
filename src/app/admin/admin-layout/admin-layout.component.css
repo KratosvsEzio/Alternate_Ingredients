@@ -35,3 +35,9 @@
     font-size: calc(0.875rem - 0.05rem);
     font-family: "roboto", sans-serif;
 }
+
+@media (max-width: 991.5px) {
+    .main-panel {
+        width: 100% !important;
+    }
+}

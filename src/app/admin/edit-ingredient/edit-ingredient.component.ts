@@ -27,13 +27,13 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
       ingredient: ['', Validators.required],
       ingredientName1: ['', Validators.required],
       file1: ['', Validators.required],
-      fileSource1: ['', Validators.required],
+      fileSource1: ['../../../assets/default.png', Validators.required],
       ingredientName2: ['', Validators.required],
       file2: ['', Validators.required],
-      fileSource2: ['', Validators.required],
+      fileSource2: ['../../../assets/default.png', Validators.required],
       ingredientName3: ['', Validators.required],
       file3: ['', Validators.required],
-      fileSource3: ['', Validators.required],
+      fileSource3: ['../../../assets/default.png', Validators.required],
     });
   }
   
@@ -52,7 +52,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
         switchMap( (value: any) => this.ingredientService.fetchAlternateIngredients(value) )
       )
       .subscribe( async (res: any) => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         const data = res.data[0];
         this.ingredientsForm.patchValue({
           ingredientName1: data.alt_ingredient_1,
@@ -76,7 +76,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         base64encodedimage = reader.result;
-        console.log('Image', base64encodedimage);
+        // console.log('Image', base64encodedimage);
         if(controlName == 'file1') {
           this.ingredientsForm.patchValue({
             fileSource1: base64encodedimage
@@ -96,7 +96,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
   }
 
   submit(form) {
-    console.log(form.value)
+    // console.log(form.value)
     this.ingredientService.editAlternateIngredients(form.value).subscribe( (res: any) => {
       this.ingredientsForm.reset();
       if(res.code == 200) {
@@ -104,8 +104,8 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
       } else {
         this.showError(res.message);
       }
-      console.log('res');
-    });;
+      // console.log('res');
+    });
   }
 
   // ---------------------------------------Success Toaster-------------------------------------------------------//
@@ -118,7 +118,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
 
   // ---------------------------------------Error Toaster---------------------------------------------------------//
   showError(message) {
-    console.log('message: ', message)
+    // console.log('message: ', message)
     this.toastr.error(message, 'Error', {
       progressBar: true,
       progressAnimation: 'increasing'

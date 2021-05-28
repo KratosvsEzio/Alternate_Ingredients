@@ -35,6 +35,11 @@ export class IngredientService {
     return this.http.post<{status: boolean, message: string}>(this.ingredientUrl, form)
   }
 
+  editAlternateIngredients(form) {
+    console.log('form data', form)
+    return this.http.put<{status: boolean, message: string}>(this.ingredientUrl, form)
+  }
+
   // ---------------------------------------Success Toaster-------------------------------------------------------//
   showSuccess(message) {
     this.toastr.success(message, 'Success', {

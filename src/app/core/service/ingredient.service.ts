@@ -11,7 +11,7 @@ export class IngredientService {
 
   alternateIngredients = new BehaviorSubject<any>([])
 
-  private ingredientUrl = 'https://aashir-azeem-replace-ingredients.netlify.app/.netlify/functions/app'; // Production
+  private ingredientUrl = 'https://aashir-azeem-replace-ingredients-api.netlify.app/.netlify/functions/app'; // Production
   // private ingredientUrl = 'http://localhost:9000/.netlify/functions/app/api/ingredient'; // Development
 
   constructor(

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class IngredientService {
 
   alternateIngredients = new BehaviorSubject<any>([])
 
-  // private ingredientUrl = 'https://node.subthegrub.com/api/ingredient'; // Production
-  private ingredientUrl = 'http://localhost:4000/api/ingredient'; // Development
+  private ingredientUrl = 'https://aashir-azeem-replace-ingredients.netlify.app/.netlify/functions/app'; // Production
+  // private ingredientUrl = 'http://localhost:9000/.netlify/functions/app/api/ingredient'; // Development
 
   constructor(
     private http: HttpClient,

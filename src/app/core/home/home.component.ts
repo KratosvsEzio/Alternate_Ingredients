@@ -2,6 +2,7 @@ import { IngredientService } from './../service/ingredient.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('searchIngredient') searchIngredientsInput: ElementRef;
   alternateIngredients: any = []
 
-  constructor(private ingredientService: IngredientService) { }
+  constructor(
+    private ingredientService: IngredientService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.ingredientService.getAlternateIngredients().subscribe( (alternateIngredients: any) => {
@@ -26,7 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     fromEvent(this.searchIngredientsInput.nativeElement, 'keyup')
       .pipe(
-        debounceTime(300),
+        debounceTime(600),
         pluck('target', 'value'),
         // distinctUntilChanged(),
         map( (value) => value),
@@ -37,26 +41,52 @@ export class HomeComponent implements OnInit, AfterViewInit {
         switchMap( (value: any) => this.ingredientService.fetchAlternateIngredients(value) )
       )
       .subscribe( async (res: any) => {
-        // console.log(res.data[0]);
-        const data = res.data[0];
-        this.ingredientService.setAlternateIngredients([
-          {
-            name: data.alt_ingredient_1,
-            imageSrc: data.alt_ingredient_1_image,
-            imageAlt: 'alternate ingredient 1'
-          },
-          {
-            name: data.alt_ingredient_2,
-            imageSrc: data.alt_ingredient_2_image,
-            imageAlt: 'alternate ingredient 2'
-          },
-          {
-            name: data.alt_ingredient_3,
-            imageSrc: data.alt_ingredient_3_image,
-            imageAlt: 'alternate ingredient 3'
-          },
-        ])
-      });
+
+        if(!res.data) {
+          this.showError(res.message);
+
+        } else {
+          console.log(res.data[0]);
+          this.showSuccess(res.message);
+  
+          const data = res.data[0];
+          this.ingredientService.setAlternateIngredients([
+            {
+              name: data.alt_ingredient_1,
+              imageSrc: data.alt_ingredient_1_image,
+              imageAlt: 'alternate ingredient 1'
+            },
+            {
+              name: data.alt_ingredient_2,
+              imageSrc: data.alt_ingredient_2_image,
+              imageAlt: 'alternate ingredient 2'
+            },
+            {
+              name: data.alt_ingredient_3,
+              imageSrc: data.alt_ingredient_3_image,
+              imageAlt: 'alternate ingredient 3'
+            },
+          ])
+        }
+      })
+      ;
+  }
+
+  // ---------------------------------------Success Toaster-------------------------------------------------------//
+  showSuccess(message) {
+    this.toastr.success(message, 'Success', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
+  }
+
+  // ---------------------------------------Error Toaster---------------------------------------------------------//
+  showError(message) {
+    // console.log('message: ', message)
+    this.toastr.error(message, 'Error', {
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
   }
 
 }

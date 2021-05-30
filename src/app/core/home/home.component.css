@@ -10,7 +10,8 @@
 
 .card-img-top {
     max-height: 400px;
-    min-height: 340px;
+    min-height: 340px;    
+    min-width: -webkit-fill-available;
     object-fit: cover;
     background-color: white;
     border-radius: 5px;

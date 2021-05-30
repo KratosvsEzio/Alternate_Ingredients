@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -11,7 +10,8 @@ export class IngredientService {
 
   alternateIngredients = new BehaviorSubject<any>([])
 
-  private ingredientUrl = 'https://node.subthegrub.com/api/ingredient';
+  // private ingredientUrl = 'https://node.subthegrub.com/api/ingredient'; // Production
+  private ingredientUrl = 'http://localhost:4000/api/ingredient'; // Development
 
   constructor(
     private http: HttpClient,

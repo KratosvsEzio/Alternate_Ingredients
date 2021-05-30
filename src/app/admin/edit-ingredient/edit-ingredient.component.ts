@@ -43,7 +43,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
       .pipe(
         debounceTime(300),
         pluck('target', 'value'),
-        distinctUntilChanged(),
+        // distinctUntilChanged(),
         map( (value) => value),
         tap( () => {
           this.ingredientService.setAlternateIngredients([])
@@ -99,6 +99,13 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
     // console.log(form.value)
     this.ingredientService.editAlternateIngredients(form.value).subscribe( (res: any) => {
       this.ingredientsForm.reset();
+
+      this.ingredientsForm.patchValue({
+        fileSource1: '../../../assets/default.png',
+        fileSource2: '../../../assets/default.png',
+        fileSource3: '../../../assets/default.png',
+      });
+      
       if(res.code == 200) {
         this.showSuccess(res.message);
       } else {

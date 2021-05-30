@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .pipe(
         debounceTime(300),
         pluck('target', 'value'),
-        distinctUntilChanged(),
+        // distinctUntilChanged(),
         map( (value) => value),
         tap( () => {
           this.ingredientService.setAlternateIngredients([])
